@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="THIS IS YOUR NAME">
+<meta name="author" content="Jake Bunz">
+<meta name="dcterms.date" content="2022-11-06">
 
-<title>SPMC350Blog - CHANGE THIS TO BE THE TITLE OF YOUR POST</title>
+<title>SPMC350Blog - Mike Trout and Shohei Ohtani are the Angels</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -166,11 +167,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">CHANGE THIS TO BE THE TITLE OF YOUR POST</h1>
+      <h1 class="title">Mike Trout and Shohei Ohtani are the Angels</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">lowercaseword</div>
-                <div class="quarto-category">lowercaseword</div>
-                <div class="quarto-category">lowercaseword</div>
+                <div class="quarto-category">angels</div>
+                <div class="quarto-category">baseball</div>
+                <div class="quarto-category">stats</div>
               </div>
                   </div>
   </div>
@@ -181,14 +182,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>THIS IS YOUR NAME </p>
+               <p>Jake Bunz </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Invalid Date</p>
+        <p class="date">November 6, 2022</p>
       </div>
     </div>
       
@@ -205,257 +206,159 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p>get screenshot of graph and change it to image.png</p>
+<p>It felt like every night you would see a story about how Shohei Ohtani did something that only 1 other player in baseball history has done and Mike Trout hit 2 doubles and a homerun. It felt like it would always end with “and the Angels lose.”</p>
+<p>Mike Trout and Shohei Ohtani are some of the best players in baseball and definitley the best on the Angels. What you might not know is that the rest of the Angels haven’t done much in supporting their standout stars.</p>
+<p>The numbers are shocking.</p>
+<p>Wins above replacement (WAR), is the stat that was developed to basically show the players contribution to their team. So we will look at WAR for every player in the MLB for this last season.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
-✔ ggplot2 3.3.6     ✔ purrr   0.3.4
-✔ tibble  3.1.8     ✔ dplyr   1.0.9
-✔ tidyr   1.2.0     ✔ stringr 1.4.1
-✔ readr   2.1.2     ✔ forcats 0.5.2
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'scales'
-
-The following object is masked from 'package:purrr':
-
-    discard
-
-The following object is masked from 'package:readr':
-
-    col_factor</code></pre>
-</div>
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>war <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"fangraphs-war-leaderboard.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 1495 Columns: 8
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (2): Name, Team
-dbl (6): PA, IP, Bat WAR, Pit WAR, Total WAR, PlayerId
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>hittingstats <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"angelsteamhitting.csv"</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Name =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">*"</span>, <span class="st">""</span>, Name)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Name =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">#"</span>, <span class="st">""</span>, Name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 66 Columns: 29
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr  (3): Pos, Name, Name-additional
-dbl (26): Rk, Age, G, PA, AB, R, H, 2B, 3B, HR, RBI, SB, CS, BB, SO, BA, OBP...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pitchingstats <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"anglesteampitching.csv"</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Name =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">*"</span>, <span class="st">""</span>, Name)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Name =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">#"</span>, <span class="st">""</span>, Name))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 35 Columns: 35
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr  (3): Pos, Name, Name-additional
-dbl (32): Rk, Age, W, L, W-L%, ERA, G, GS, GF, CG, SHO, SV, IP, H, R, ER, HR...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>percentage <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"percentage.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 8 Columns: 4
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (2): Name, Type
-dbl (2): Number, Percent
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>topwar<span class="ot">&lt;-</span> war <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span><span class="sc">&gt;</span><span class="fl">3.84</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Name, <span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>, Team)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>angelswar <span class="ot">&lt;-</span> topwar <span class="sc">%&gt;%</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"LAA"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> topwar,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">reorder</span>(Name, <span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>), <span class="at">weight=</span> <span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>), <span class="at">fill=</span> <span class="st">"grey"</span>) <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> angelswar,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">reorder</span>(Name, <span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>), <span class="at">weight=</span> <span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>), <span class="at">fill=</span> <span class="st">"red"</span>)<span class="sc">+</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"How good are they actually?"</span>,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Shohei Ohtani and Mike Trout are in the top 20 of WAR, but there isn't another Angel until 76."</span>,</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span> <span class="st">"Player Name"</span>,</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span> <span class="st">"Total WAR"</span>,</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="at">caption=</span> <span class="st">"By: Jake Bunz | Source: FanGraphs"</span>)<span class="sc">+</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span> <span class="dv">20</span>, <span class="at">face=</span><span class="st">"bold"</span>),</span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title.position =</span> <span class="st">"plot"</span>)<span class="sc">+</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>war <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"fangraphs-war-leaderboard.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>topwar<span class="ot">&lt;-</span> war <span class="sc">%&gt;%</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span><span class="sc">&gt;</span><span class="fl">3.84</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Name, <span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>, Team)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>angelswar <span class="ot">&lt;-</span> topwar <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Team <span class="sc">==</span> <span class="st">"LAA"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> topwar,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">reorder</span>(Name, <span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>), <span class="at">weight=</span> <span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>), <span class="at">fill=</span> <span class="st">"grey"</span>) <span class="sc">+</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> angelswar,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span> <span class="fu">reorder</span>(Name, <span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>), <span class="at">weight=</span> <span class="st">`</span><span class="at">Total WAR</span><span class="st">`</span>), <span class="at">fill=</span> <span class="st">"red"</span>)<span class="sc">+</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title=</span><span class="st">"How good are they actually?"</span>,</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Shohei Ohtani and Mike Trout are in the top 20 of WAR, but there isn't another Angel until 76."</span>,</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x=</span> <span class="st">"Player Name"</span>,</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">y=</span> <span class="st">"Total WAR"</span>,</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="at">caption=</span> <span class="st">"By: Jake Bunz | Source: FanGraphs"</span>)<span class="sc">+</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size=</span> <span class="dv">20</span>, <span class="at">face=</span><span class="st">"bold"</span>),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title.position =</span> <span class="st">"plot"</span>)<span class="sc">+</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="288"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="288"></p>
 </div>
 </div>
+<p>Shohei finished 2nd in the MLB for WAR this year with Trout closely behind him. Trout missed 40 games this year due to injuries and he still finished in the top 20.</p>
+<p>This demonstrates how good they are compared to the rest of the league, but how do they stack up with the rest of the Angels?</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>hittingdata <span class="ot">&lt;-</span> hittingstats <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(G<span class="sc">&gt;</span><span class="dv">1</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ExtraBaseHits=</span> (<span class="st">`</span><span class="at">2B</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">3B</span><span class="st">`</span>), <span class="at">Singles =</span> H<span class="sc">-</span>ExtraBaseHits) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Name, Singles, ExtraBaseHits, HR, RBI) <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols=</span>(<span class="sc">-</span>Name), <span class="at">names_to=</span><span class="st">"Type"</span>, <span class="at">values_to =</span> <span class="st">"Number"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bar1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span> hittingdata,</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Name, Number), <span class="at">weight=</span> Number, <span class="at">fill=</span> Type)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Carrying the offense"</span>,<span class="at">subtitle =</span> <span class="st">"Trout and Ohtani lead the team in producing the most offense in 2022"</span>,</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span> <span class="st">"Ammount"</span>,</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span> <span class="st">"Player Name"</span>)<span class="sc">+</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>),</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>bar2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span> percentage,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span> Type, <span class="at">weight=</span>Percent, <span class="at">fill=</span>Name))<span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"red"</span>))<span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Percentage of offense"</span>,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>,</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span> <span class="st">"Percent"</span>)<span class="sc">+</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(bar1, bar2, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>hittingstats <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"angelsteamhitting.csv"</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Name =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">*"</span>, <span class="st">""</span>, Name)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Name =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">#"</span>, <span class="st">""</span>, Name))</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>hittingdata <span class="ot">&lt;-</span> hittingstats <span class="sc">%&gt;%</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(G<span class="sc">&gt;</span><span class="dv">1</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ExtraBaseHits=</span> (<span class="st">`</span><span class="at">2B</span><span class="st">`</span><span class="sc">+</span><span class="st">`</span><span class="at">3B</span><span class="st">`</span>), <span class="at">Singles =</span> H<span class="sc">-</span>ExtraBaseHits) <span class="sc">%&gt;%</span> <span class="fu">select</span>(Name, Singles, ExtraBaseHits, HR, RBI) <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="at">cols=</span>(<span class="sc">-</span>Name), <span class="at">names_to=</span><span class="st">"Type"</span>, <span class="at">values_to =</span> <span class="st">"Number"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>bar1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span> hittingdata,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span><span class="fu">reorder</span>(Name, Number), <span class="at">weight=</span> Number, <span class="at">fill=</span> Type)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Carrying the offense"</span>,<span class="at">subtitle =</span> <span class="st">"Trout and Ohtani lead the team in producing the most offense in 2022"</span>,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span> <span class="st">"Player Name"</span>,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span> <span class="st">"Ammount"</span>)<span class="sc">+</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()<span class="sc">+</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">20</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">14</span>),</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title.position =</span> <span class="st">"plot"</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>percentage <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"percentage.csv"</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>bar2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span> percentage,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span> Type, <span class="at">weight=</span>Percent, <span class="at">fill=</span>Name))<span class="sc">+</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"red"</span>))<span class="sc">+</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Percentage of offense"</span>,</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">""</span>,</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span> <span class="st">"Percent"</span>,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="at">caption=</span> <span class="st">"By: Jake Bunz | Source: Baseball Reference"</span>)<span class="sc">+</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(bar1, bar2, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="480"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="480"></p>
 </div>
 </div>
+<p>They produce nearly 30% of all major offensive categories on their team. Having nearly a third of all team offense rely on two players isn’t exactly a recipe for success.</p>
+<p>That’s just offense, let’s look at pitching stats from the Angels starting rotation.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>starters <span class="ot">&lt;-</span> pitchingstats <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(GS<span class="sc">&gt;</span><span class="dv">8</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Name, W, L, ERA, IP, SO, WHIP, <span class="st">`</span><span class="at">SO9</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details>
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>starters <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Ohtani is the single star in the starting rotation."</span>,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="st">"He leads the team in all major pitching categories."</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"subtitle"</span>)</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"**By:** Jake Bunz | **Source:** Baseball Reference"</span>)</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"bottom"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">15</span>)</span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span></span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>()<span class="sc">%&gt;%</span></span>
-<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">"none"</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color=</span><span class="st">"red"</span>),</span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>)</span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Name <span class="sc">==</span> <span class="st">"Shohei Ohtani"</span>)</span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>pitchingstats <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"anglesteampitching.csv"</span>) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Name =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">*"</span>, <span class="st">""</span>, Name)) <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Name =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">#"</span>, <span class="st">""</span>, Name))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>starters <span class="ot">&lt;-</span> pitchingstats <span class="sc">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(GS<span class="sc">&gt;</span><span class="dv">8</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Name, W, L, ERA, IP, SO, WHIP, <span class="st">`</span><span class="at">SO9</span><span class="st">`</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>starters <span class="sc">%&gt;%</span> <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Ohtani is the single star in the starting rotation."</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="st">"He leads the team in all major pitching categories."</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"title"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> <span class="fu">tab_style</span>(</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">align =</span> <span class="st">"left"</span>),</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_title</span>(<span class="st">"subtitle"</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_source_note</span>(</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_note =</span> <span class="fu">md</span>(<span class="st">"**By:** Jake Bunz | **Source:** Baseball Reference"</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_column_labels</span>(<span class="at">columns =</span> <span class="fu">everything</span>()),</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_borders</span>(<span class="at">sides =</span> <span class="st">"bottom"</span>, <span class="at">weight =</span> <span class="fu">px</span>(<span class="dv">3</span>)),</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">15</span>)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">%&gt;%</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_row_striping</span>()<span class="sc">%&gt;%</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">opt_table_lines</span>(<span class="st">"none"</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">style =</span> <span class="fu">list</span>(</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_fill</span>(<span class="at">color=</span><span class="st">"red"</span>),</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">cell_text</span>(<span class="at">color =</span> <span class="st">"black"</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">locations =</span> <span class="fu">cells_body</span>(</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>      <span class="at">rows =</span> Name <span class="sc">==</span> <span class="st">"Shohei Ohtani"</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 
-<div id="asvkyvhzcj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ywpgwyzrdn" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-:where(#asvkyvhzcj) .gt_table {
+:where(#ywpgwyzrdn) .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -480,7 +383,7 @@ dbl (2): Number, Percent
   border-left-color: #D3D3D3;
 }
 
-:where(#asvkyvhzcj) .gt_heading {
+:where(#ywpgwyzrdn) .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -492,7 +395,7 @@ dbl (2): Number, Percent
   border-right-color: #D3D3D3;
 }
 
-:where(#asvkyvhzcj) .gt_title {
+:where(#ywpgwyzrdn) .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -504,7 +407,7 @@ dbl (2): Number, Percent
   border-bottom-width: 0;
 }
 
-:where(#asvkyvhzcj) .gt_subtitle {
+:where(#ywpgwyzrdn) .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -516,13 +419,13 @@ dbl (2): Number, Percent
   border-top-width: 0;
 }
 
-:where(#asvkyvhzcj) .gt_bottom_border {
+:where(#ywpgwyzrdn) .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-:where(#asvkyvhzcj) .gt_col_headings {
+:where(#ywpgwyzrdn) .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -537,7 +440,7 @@ dbl (2): Number, Percent
   border-right-color: #D3D3D3;
 }
 
-:where(#asvkyvhzcj) .gt_col_heading {
+:where(#ywpgwyzrdn) .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -557,7 +460,7 @@ dbl (2): Number, Percent
   overflow-x: hidden;
 }
 
-:where(#asvkyvhzcj) .gt_column_spanner_outer {
+:where(#ywpgwyzrdn) .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -569,15 +472,15 @@ dbl (2): Number, Percent
   padding-right: 4px;
 }
 
-:where(#asvkyvhzcj) .gt_column_spanner_outer:first-child {
+:where(#ywpgwyzrdn) .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-:where(#asvkyvhzcj) .gt_column_spanner_outer:last-child {
+:where(#ywpgwyzrdn) .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-:where(#asvkyvhzcj) .gt_column_spanner {
+:where(#ywpgwyzrdn) .gt_column_spanner {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -589,7 +492,7 @@ dbl (2): Number, Percent
   width: 100%;
 }
 
-:where(#asvkyvhzcj) .gt_group_heading {
+:where(#ywpgwyzrdn) .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -614,7 +517,7 @@ dbl (2): Number, Percent
   vertical-align: middle;
 }
 
-:where(#asvkyvhzcj) .gt_empty_group_heading {
+:where(#ywpgwyzrdn) .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -629,15 +532,15 @@ dbl (2): Number, Percent
   vertical-align: middle;
 }
 
-:where(#asvkyvhzcj) .gt_from_md > :first-child {
+:where(#ywpgwyzrdn) .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-:where(#asvkyvhzcj) .gt_from_md > :last-child {
+:where(#ywpgwyzrdn) .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-:where(#asvkyvhzcj) .gt_row {
+:where(#ywpgwyzrdn) .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -656,7 +559,7 @@ dbl (2): Number, Percent
   overflow-x: hidden;
 }
 
-:where(#asvkyvhzcj) .gt_stub {
+:where(#ywpgwyzrdn) .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -669,7 +572,7 @@ dbl (2): Number, Percent
   padding-right: 5px;
 }
 
-:where(#asvkyvhzcj) .gt_stub_row_group {
+:where(#ywpgwyzrdn) .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -683,11 +586,11 @@ dbl (2): Number, Percent
   vertical-align: top;
 }
 
-:where(#asvkyvhzcj) .gt_row_group_first td {
+:where(#ywpgwyzrdn) .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-:where(#asvkyvhzcj) .gt_summary_row {
+:where(#ywpgwyzrdn) .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -697,16 +600,16 @@ dbl (2): Number, Percent
   padding-right: 5px;
 }
 
-:where(#asvkyvhzcj) .gt_first_summary_row {
+:where(#ywpgwyzrdn) .gt_first_summary_row {
   border-top-style: none;
   border-top-color: #D3D3D3;
 }
 
-:where(#asvkyvhzcj) .gt_first_summary_row.thick {
+:where(#ywpgwyzrdn) .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-:where(#asvkyvhzcj) .gt_last_summary_row {
+:where(#ywpgwyzrdn) .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -716,7 +619,7 @@ dbl (2): Number, Percent
   border-bottom-color: #D3D3D3;
 }
 
-:where(#asvkyvhzcj) .gt_grand_summary_row {
+:where(#ywpgwyzrdn) .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -726,7 +629,7 @@ dbl (2): Number, Percent
   padding-right: 5px;
 }
 
-:where(#asvkyvhzcj) .gt_first_grand_summary_row {
+:where(#ywpgwyzrdn) .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -736,11 +639,11 @@ dbl (2): Number, Percent
   border-top-color: #D3D3D3;
 }
 
-:where(#asvkyvhzcj) .gt_striped {
+:where(#ywpgwyzrdn) .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-:where(#asvkyvhzcj) .gt_table_body {
+:where(#ywpgwyzrdn) .gt_table_body {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -749,7 +652,7 @@ dbl (2): Number, Percent
   border-bottom-color: #D3D3D3;
 }
 
-:where(#asvkyvhzcj) .gt_footnotes {
+:where(#ywpgwyzrdn) .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -763,7 +666,7 @@ dbl (2): Number, Percent
   border-right-color: #D3D3D3;
 }
 
-:where(#asvkyvhzcj) .gt_footnote {
+:where(#ywpgwyzrdn) .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -772,7 +675,7 @@ dbl (2): Number, Percent
   padding-right: 5px;
 }
 
-:where(#asvkyvhzcj) .gt_sourcenotes {
+:where(#ywpgwyzrdn) .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -786,7 +689,7 @@ dbl (2): Number, Percent
   border-right-color: #D3D3D3;
 }
 
-:where(#asvkyvhzcj) .gt_sourcenote {
+:where(#ywpgwyzrdn) .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -794,64 +697,64 @@ dbl (2): Number, Percent
   padding-right: 5px;
 }
 
-:where(#asvkyvhzcj) .gt_left {
+:where(#ywpgwyzrdn) .gt_left {
   text-align: left;
 }
 
-:where(#asvkyvhzcj) .gt_center {
+:where(#ywpgwyzrdn) .gt_center {
   text-align: center;
 }
 
-:where(#asvkyvhzcj) .gt_right {
+:where(#ywpgwyzrdn) .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-:where(#asvkyvhzcj) .gt_font_normal {
+:where(#ywpgwyzrdn) .gt_font_normal {
   font-weight: normal;
 }
 
-:where(#asvkyvhzcj) .gt_font_bold {
+:where(#ywpgwyzrdn) .gt_font_bold {
   font-weight: bold;
 }
 
-:where(#asvkyvhzcj) .gt_font_italic {
+:where(#ywpgwyzrdn) .gt_font_italic {
   font-style: italic;
 }
 
-:where(#asvkyvhzcj) .gt_super {
+:where(#ywpgwyzrdn) .gt_super {
   font-size: 65%;
 }
 
-:where(#asvkyvhzcj) .gt_footnote_marks {
+:where(#ywpgwyzrdn) .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-:where(#asvkyvhzcj) .gt_asterisk {
+:where(#ywpgwyzrdn) .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-:where(#asvkyvhzcj) .gt_indent_1 {
+:where(#ywpgwyzrdn) .gt_indent_1 {
   text-indent: 5px;
 }
 
-:where(#asvkyvhzcj) .gt_indent_2 {
+:where(#ywpgwyzrdn) .gt_indent_2 {
   text-indent: 10px;
 }
 
-:where(#asvkyvhzcj) .gt_indent_3 {
+:where(#ywpgwyzrdn) .gt_indent_3 {
   text-indent: 15px;
 }
 
-:where(#asvkyvhzcj) .gt_indent_4 {
+:where(#ywpgwyzrdn) .gt_indent_4 {
   text-indent: 20px;
 }
 
-:where(#asvkyvhzcj) .gt_indent_5 {
+:where(#ywpgwyzrdn) .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -936,6 +839,8 @@ dbl (2): Number, Percent
 </div>
 </div>
 </div>
+<p>Shohei is the work horse for the Angels rotation and his numbers put him in elite company at the top of the league. The rest of the starters were no where close to Shohei.</p>
+<p>If the Angels want to win in the future they can’t just hope Trout and Ohtani pull the team along. They need to find pieces that will support their stars and team as a whole.</p>
 
 
 
