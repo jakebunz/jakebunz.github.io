@@ -1,5 +1,12 @@
 [
   {
+    "objectID": "posts/andrew-luck-pain/index.html",
+    "href": "posts/andrew-luck-pain/index.html",
+    "title": "Andrew Luck was to smart for his own good",
+    "section": "",
+    "text": "Code\nlibrary(tidyverse)\n\nqbstats <- read_csv(\"qbs.csv\")\ncoltsqbstats <- qbstats %>%\n  filter(Tm == \"IND\" & G>7) %>%\n  select(Player, QBR, Season, G) %>%\n  mutate(PlayerSeason = paste(Player,Season))\nchosenone <- coltsqbstats%>%\n  filter(Player== \"Andrew Luck\")\n\nggplot() +\n  geom_bar(\n    data= coltsqbstats,\n    aes(x= reorder(PlayerSeason, QBR),\n    weight= QBR\n  ))+\n  geom_bar(\n    data = chosenone, \n    aes(x= reorder(PlayerSeason, QBR),\n    weight= QBR),\n    fill=\"blue\"\n    ) + \n  coord_flip()+\n  labs(\n    x= \"Quarterback\",\n    y= \"QBR\",\n    title = \"Colts Quarterbacks QBR since 2012\",\n    subtitle = \"After Luck retired no QB has been rated higher than him\",\n    caption = \"Source: ProFootball Reference | By: Jake Bunz\")+\n  theme_minimal()+\n theme(\n    plot.title = element_text(size = 18, face = \"bold\"))\n\n\n\n\n\n\n\nCode\nlibrary(tidyverse)\nlibrary(ggalt)\n\nqbstats <- read_csv(\"qbs.csv\")\nlucky <- qbstats %>% filter(Player == \"Andrew Luck\" & Season == '2018')\nmanning <- qbstats %>%\n  filter(Yds>5400)\ntopqb <- qbstats %>%\n  filter(Yds > 4500 & TD > 38)\n\nggplot()+\n  geom_point(data = qbstats, aes(x= Yds, y = TD), color= \"grey\")+\n  geom_point(data = topqb, aes(x= Yds, y = TD), color = \"black\")+\n  geom_point(data = lucky, aes(x= Yds, y = TD), color= \"blue\")+\n  geom_point(data = manning, aes(x= Yds, y = TD), color = \"orange\")+\n  geom_encircle(data=topqb, aes(x=Yds, y=TD), s_shape=.5, expand=.03, colour=\"red\")+\n  geom_text(aes(x=4000, y= 45, label=\"Seasons with at least 4500\\n Yds and 38 TD\"), color=\"dark grey\", size=4)+\n  geom_text(aes(x=4800, y=55, label=\"Peyton Manning\"), fontface= \"bold\")+\n  geom_text(aes(x=4100, y=39, label=\"Andrew Luck\"), fontface= \"bold\")+\n  labs(\n    x=\"Passing Yards\", \n    y=\"Touchdowns\", \n    title=\"Quarterback stats from the last 9 seasons\", \n    subtitle=\"Andrew Lucks 2018 season puts him among an elite group of quarterbacks\",\n    caption=\"Source: ProFootball Reference | By Jake Bunz\") + \n  theme_minimal() + \n  theme(\n    plot.title = element_text(size = 20, face = \"bold\")\n    )"
+  },
+  {
     "objectID": "posts/the-only-good-angels/index.html",
     "href": "posts/the-only-good-angels/index.html",
     "title": "Mike Trout and Shohei Ohtani are the Angels",
@@ -11,7 +18,7 @@
     "href": "index.html",
     "title": "SPMC350Blog",
     "section": "",
-    "text": "angels\n\n\nbaseball\n\n\nstats\n\n\n\n\n\n\n\n\n\n\n\nNov 6, 2022\n\n\nJake Bunz\n\n\n\n\n\n\nNo matching items"
+    "text": "colts\n\n\nfootball\n\n\nstats\n\n\n\n\n\n\n\n\n\n\n\nNov 6, 2022\n\n\nJake Bunz\n\n\n\n\n\n\n  \n\n\n\n\n\n\n\n\n\n\nangels\n\n\nbaseball\n\n\nstats\n\n\n\n\n\n\n\n\n\n\n\nNov 6, 2022\n\n\nJake Bunz\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
